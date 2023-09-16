@@ -44,42 +44,42 @@ public class GameBoard extends Board {
 	/**
 	 * Method to used to shoot a coordinate (square).
 	 * 
-	 * @param place
-	 *            that is shot
+	 * @param place that is shot
 	 * 
 	 * @return true if hit, false if miss
 	 */
 	public boolean shootBoard(int place, String playerBeingShotName, String shooterName) {
 
 		// Check if coordinate has been shot before.
-		if (shotPlace.contains(place) == false) {
-			// if not, add to coordinates that have been shot
-			shotPlace.add(new Integer(place));
+        if (shotPlace.contains(place) == true) {
+            return false;
+        }
+        // if not, add to coordinates that have been shot
+        shotPlace.add(new Integer(place));
 
-			// Check if place can be converted into a coordinate.
-			if (board.containsKey(place) == true) {
+        // Check if place can be converted into a coordinate.
+        if (board.containsKey(place) == false) {
+            System.out.println(shooterName + " missed!");
+            return false;
+        }
 
-				// Convert place into a coordinate
-				Coordinate cor = board.get(place);
+        // Convert place into a coordinate
+        Coordinate cor = board.get(place);
 
-				// Check if there lies a ship at that coordinate
-				if (cor.isShot()) {
-					System.out.println(playerBeingShotName + "'s ship was hit!");
+        // Check if there lies a ship at that coordinate
+        if (cor.hasShip()) {
+            System.out.println(playerBeingShotName + "'s ship was hit!");
 
-					Ship corShip = cor.getShip();
+            Ship corShip = cor.getShip();
 
-					if (corShip.hasSunk()) {
-						ships.remove(corShip);
-						System.out.println("The ship has sunk!");
-					}
+            if (corShip.hasSunk()) {
+                ships.remove(corShip);
+                System.out.println("The ship has sunk!");
+            }
 
-					return true;
+            return true;
 
-				} else {
-					System.out.println(shooterName + " missed!");
-				}
-			}
-		}
+        }
 
 		return false;
 	}

@@ -1,7 +1,6 @@
 package board;
 
 import java.util.HashMap;
-import java.util.Random;
 
 import Ships.ArbitraryShip;
 import Ships.SmallShip;

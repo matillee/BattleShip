@@ -60,7 +60,7 @@ public class Coordinate {
 	 * If the coordinate is shot
 	 * @return true if coordinate contains a ship, else false
 	 */
-	public boolean isShot() {
+	public boolean hasShip() {
 		if (this.ship.equals("x")) {
 			this.print = 'X'; // Hit
 			myShip.reduceLife();

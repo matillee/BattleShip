@@ -30,7 +30,7 @@ public class ComputerPlayer extends Player {
 			
 			hit = playerBeingShotBoard.shootBoard(place,playerBeingShot.name, super.name);
 			
-			super.hitPercent(hit);
+			super.updateHitPercent(hit);
 
 			System.out.println(" ");
 			System.out.println(playerBeingShot.name + "'s board after " + super.name + " shot it:");

@@ -25,7 +25,7 @@ public class Board {
 			for (int verticals : vertical) {
 				int key = (horisontals * 10) + verticals;
 				Coordinate cor = new Coordinate(key);
-				board.put(key, cor);
+				this.board.put(key, cor);
 			}
 		}
 	}
@@ -43,7 +43,7 @@ public class Board {
 			System.out.print(l + ("  "));
 			for (int n = 0; n < 10; n++) {
 				int key = (horisontal[l] * 10) + (vertical[n]);
-				Coordinate cor = board.get(key);
+				Coordinate cor = this.board.get(key);
 				System.out.print(cor.gamePrint() + ("  "));
 				if (n == 10) {
 					System.out.println();

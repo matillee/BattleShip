@@ -31,7 +31,7 @@ public class Player {
 		return this.myBoard;
 	}
 
-	protected void hitPercent(boolean hit) { 
+	protected void updateHitPercent(boolean hit) { 
 		if (hit) {
 			this.numOfHits++;
 		}
@@ -107,7 +107,7 @@ public class Player {
 
 			hit = playerBeingShotBoard.shootBoard(place, playerBeingShot.name, this.name);
 
-			hitPercent(hit);
+			updateHitPercent(hit);
 			
 
 			System.out.println(" ");
