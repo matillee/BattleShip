@@ -35,19 +35,23 @@ public class GameEngine {
 
 		for (int i = 0; i < numberOfPlayers; i++) {
 
-			System.out.println("Player " + i + ": ");
+			String playerName = enterName();
+			
+			GameBoard gameBoard = new GameBoard();
+			PlacementBoard placementBoard = new PlacementBoard(gameBoard.getGameBoard());
+			
 
-			PlacementBoard placementBoard = new PlacementBoard();
-
-			System.out.println("Enter 'y' if you want to place your ships manually");
+			System.out.println(playerName +": Enter 'y' if you want to place your ships manually");
 			String input = scan.next();
 			if (input.equalsIgnoreCase("y")) {
-				placementBoard.placeShip();
+				placementBoard.placeShip(playerName);
 			} else {
 				placementBoard.autoPlacementShip();
 			}
 
-			playerList.add(new Player(enterName(), new GameBoard(placementBoard.getGameBoard())));
+			gameBoard.setGameBoard(placementBoard.getGameBoard());
+			gameBoard.setShips(placementBoard.getShips());
+			playerList.add(new Player(playerName, gameBoard));
 
 		}
 
@@ -64,11 +68,12 @@ public class GameEngine {
 
 			String name = "Computer " + i;
 
-			PlacementBoard placementBoard = new PlacementBoard();
-
+			GameBoard gameBoard = new GameBoard();
+			PlacementBoard placementBoard = new PlacementBoard(gameBoard.getGameBoard());
 			placementBoard.autoPlacementShip();
-
-			playerList.add(new ComputerPlayer(name, new GameBoard(placementBoard.getGameBoard())));
+			gameBoard.setGameBoard(placementBoard.getGameBoard());
+			gameBoard.setShips(placementBoard.getShips());
+			playerList.add(new ComputerPlayer(name, gameBoard));
 
 		}
 

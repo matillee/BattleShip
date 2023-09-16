@@ -35,7 +35,7 @@ public class Board {
 	 * Prints the board during the game, used to hide the ships until they've been
 	 * shot.
 	 */
-    public void printBoard() {
+    public void printBoard(HashMap<Integer, Coordinate> gameBoard) {
         System.out.println("   0  1  2  3  4  5  6  7  8  9");
 
 		for (int l = 0; l < 10; l++) {
@@ -43,8 +43,16 @@ public class Board {
 			System.out.print(l + ("  "));
 			for (int n = 0; n < 10; n++) {
 				int key = (horisontal[l] * 10) + (vertical[n]);
-				Coordinate cor = this.board.get(key);
-				System.out.print(cor.gamePrint() + ("  "));
+				// Coordinates from gameboard always need to be used for printing, 
+				// since they are removed from the placementboard
+				if (gameBoard != null){
+					Coordinate cor = gameBoard.get(key);
+					System.out.print(cor.placementPrint() + ("  "));
+				}else{
+					Coordinate cor = this.board.get(key);
+					System.out.print(cor.gamePrint() + ("  "));
+				}
+				
 				if (n == 10) {
 					System.out.println();
 				}

@@ -11,10 +11,17 @@ public class GameBoard extends Board {
     // used to optimize shootboard(), shot coordinates are placed here
     private ArrayList<Integer> shotPlace = new ArrayList<Integer>();
 
-    public GameBoard(HashMap<Integer, Coordinate> gameBoard){
-        super();
+    public void setGameBoard(HashMap<Integer, Coordinate> gameBoard){
         this.board = gameBoard;
     }
+
+    public HashMap<Integer, Coordinate> getGameBoard(){
+        return this.board;
+    }
+
+	public void setShips(ArrayList<Ship> _ships){
+		this.ships = _ships;
+	}
 
 	/**
 	 * 
@@ -58,13 +65,13 @@ public class GameBoard extends Board {
         shotPlace.add(new Integer(place));
 
         // Check if place can be converted into a coordinate.
-        if (board.containsKey(place) == false) {
+        if (this.board.containsKey(place) == false) {
             System.out.println(shooterName + " missed!");
             return false;
         }
 
         // Convert place into a coordinate
-        Coordinate cor = board.get(place);
+        Coordinate cor = this.board.get(place);
 
         // Check if there lies a ship at that coordinate
         if (cor.hasShip()) {

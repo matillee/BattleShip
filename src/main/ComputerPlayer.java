@@ -35,7 +35,7 @@ public class ComputerPlayer extends Player {
 			System.out.println(" ");
 			System.out.println(playerBeingShot.name + "'s board after " + super.name + " shot it:");
 			System.out.println("----------------------------------");
-			playerBeingShotBoard.printBoard();
+			playerBeingShotBoard.printBoard(null);
 			System.out.println("The damage percent on " + playerBeingShot.name + "'s board is: "
 					+ playerBeingShotBoard.getDamagePercent() + " %.");
 

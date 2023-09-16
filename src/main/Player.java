@@ -66,7 +66,7 @@ public class Player {
 		System.out.println(" ");
 		System.out.println(playerBeingShot.name + "'s board before shooting:");
 		System.out.println("----------------------------------");
-		playerBeingShotBoard.printBoard();
+		playerBeingShotBoard.printBoard(null);
 
 		do {
 			inputRow = null;
@@ -113,7 +113,7 @@ public class Player {
 			System.out.println(" ");
 			System.out.println(playerBeingShot.name + "'s board after " + this.name + " shot it:");
 			System.out.println("----------------------------------");
-			playerBeingShotBoard.printBoard();
+			playerBeingShotBoard.printBoard(null);
 			System.out.println("The damage percent on " + playerBeingShot.name + "'s board is: "
 					+ playerBeingShotBoard.getDamagePercent() + " %.");
 
