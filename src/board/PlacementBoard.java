@@ -1,188 +1,20 @@
-package main;
+package board;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Random;
 
-import Ships.*;
+import Ships.ArbitraryShip;
+import Ships.SmallShip;
+import main.Coordinate;
 
-/**
- * Creating the board. One board used when placing ships, and one when shooting
- * them in the game
- */
-public class OriginalBoard {
+public class PlacementBoard extends Board{
 
-	/****** MUTAL *****/
+    private int numberOfSquares = 20;
+    private HashMap<Integer, Coordinate> gameBoard = new HashMap<Integer, Coordinate>();
 
-	private ArrayList<Ship> ships;
-
-	private Scanner scan = new Scanner(System.in);
-
-	private int[] horisontal = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	private int[] vertical = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-	/**
-	 * The constructor creates a board and the coordinates for the boards are placed
-	 * in to two HashMaps.
-	 */
-	public OriginalBoard() {
-		ships = new ArrayList<Ship>();
-		gameBoard = new HashMap<Integer, Coordinate>();
-		shotPlace = new ArrayList<Integer>();
-		placeShipsBoard = new HashMap<Integer, Coordinate>();
-
-		for (int horisontals : horisontal) {
-			for (int verticals : vertical) {
-				int key = (horisontals * 10) + verticals;
-				Coordinate cor = new Coordinate(key);
-				gameBoard.put(key, cor);
-				placeShipsBoard.put(key, cor);
-			}
-		}
-	}
-
-	/**
-	 * Used when the computer needs a random coordinate in the board. Returns a
-	 * random integer that fits inside the board.
-	 */
-	public int getRandomNum() {
-
-		int randomPlacement;
-		Random ram = new Random();
-		randomPlacement = ram.nextInt(100);
-
-		return randomPlacement;
-	}
-
-	/****** GAMEBOARD *******/
-
-	// used in the game to print game board (((((to hide ships that have not been
-	// shot)))))
-	private HashMap<Integer, Coordinate> gameBoard;
-
-	// used to optimize shootboard(), shot coordinates are placed here
-	private ArrayList<Integer> shotPlace;
-
-	/**
-	 * 
-	 * @return this board's damage percent (percentage of shot squares)
-	 */
-	public float getDamagePercent() {
-		float damagePercent = ((float) this.shotPlace.size() / (float) 100);
-		return damagePercent;
-	}
-
-	/**
-	 * used when computer shoots board, to prevent shooting the same place twice
-	 * 
-	 * @return ArrayList containing Integers that have been shot
-	 */
-	public ArrayList<Integer> getShotPlace() {
-		return this.shotPlace;
-	}
-
-	/**
-	 * Methods that returns true if there are no more ships to shoot down.
-	 */
-	public boolean isLoser() {
-		return this.ships.isEmpty();
-	}
-
-	/**
-	 * Method to used to shoot a coordinate (square).
-	 * 
-	 * @param place
-	 *            that is shot
-	 * 
-	 * @return true if hit, false if miss
-	 */
-	public boolean shootBoard(int place, String playerBeingShotName, String shooterName) {
-
-		// Check if coordinate has been shot before.
-		if (shotPlace.contains(place) == false) {
-			// if not, add to coordinates that have been shot
-			shotPlace.add(new Integer(place));
-
-			// Check if place can be converted into a coordinate.
-			if (gameBoard.containsKey(place) == true) {
-
-				// Convert place into a coordinate
-				Coordinate cor = gameBoard.get(place);
-
-				// Check if there lies a ship at that coordinate
-				if (cor.isShot()) {
-					System.out.println(playerBeingShotName + "'s ship was hit!");
-
-					Ship corShip = cor.getShip();
-
-					if (corShip.hasSunk()) {
-						ships.remove(corShip);
-						System.out.println("The ship has sunk!");
-					}
-
-					return true;
-
-				} else {
-					System.out.println(shooterName + " missed!");
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Prints the board during the game, used to hide the ships until they've been
-	 * shot.
-	 */
-	public void printGameBoard() {
-
-		System.out.println("   0  1  2  3  4  5  6  7  8  9");
-
-		for (int l = 0; l < 10; l++) {
-
-			System.out.print(l + ("  "));
-			for (int n = 0; n < 10; n++) {
-				int key = (horisontal[l] * 10) + (vertical[n]);
-				Coordinate cor = gameBoard.get(key);
-				System.out.print(cor.gamePrint() + ("  "));
-				if (n == 10) {
-					System.out.println();
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-
-	/***** PLACEBOARD ******/
-
-	// when user places ship, nearby coordinates are removed from shipsPlaced to
-	// prevent user from placing ships incorrectly.
-	private HashMap<Integer, Coordinate> placeShipsBoard;
-
-	private int numberOfSquares = 20;
-
-	/**
-	 * Used when user is placing the ships, and you want ships to be visible
-	 */
-	public void printPlacingBoard() {
-
-		System.out.println("   0  1  2  3  4  5  6  7  8  9");
-
-		for (int l = 0; l < 10; l++) {
-
-			System.out.print(l + ("  "));
-			for (int n = 0; n < 10; n++) {
-				int key = (horisontal[l] * 10) + (vertical[n]);
-				Coordinate cor = this.gameBoard.get(key);
-				System.out.print(cor.placementPrint() + ("  "));
-				if (n == 10) {
-					System.out.println();
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
+    public HashMap<Integer, Coordinate> getGameBoard(){
+        return this.gameBoard;
+    }
 
 	public void autoPlacementShip() {
 
@@ -203,7 +35,7 @@ public class OriginalBoard {
 	 */
 	private void placeShipComputer(int place) {
 
-		/* (Funderade på att göra skepp av olika storlekar men blev för tidskrävande)
+		/* (Funderade pï¿½ att gï¿½ra skepp av olika storlekar men blev fï¿½r tidskrï¿½vande)
 		 * int length; Random ram = new Random();
 		 * 
 		 * do { length = ram.nextInt(6);
@@ -217,7 +49,7 @@ public class OriginalBoard {
 			return;
 		}
 
-		if (placeShipsBoard.containsKey(place) != true) {
+		if (board.containsKey(place) != true) {
 
 			return;
 		} else {
@@ -332,7 +164,7 @@ public class OriginalBoard {
 					return;
 				}
 
-				if (placeShipsBoard.containsKey(place) == false) {
+				if (board.containsKey(place) == false) {
 
 					System.out.println("This place is already taken. \n");
 					return;
@@ -359,7 +191,7 @@ public class OriginalBoard {
 					return;
 				}
 
-				if (placeShipsBoard.containsKey(place) != true) {
+				if (board.containsKey(place) != true) {
 
 					System.out.println("This place is already taken. \n");
 					return;
@@ -382,7 +214,7 @@ public class OriginalBoard {
 			}
 
 			numberOfSquares = numberOfSquares - length;
-			printPlacingBoard();
+			printBoard();
 		}
 
 	}
@@ -410,9 +242,9 @@ public class OriginalBoard {
 	 * Removes the coordinate from the HashMap if it exists.
 	 */
 	private void hashRemove(int place) {
-		if (placeShipsBoard.containsKey(place) == true) {
-			placeShipsBoard.remove(place);
+		if (board.containsKey(place) == true) {
+			board.remove(place);
 		}
 	}
-
+    
 }

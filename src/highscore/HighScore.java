@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import main.OriginalBoard;
 import main.Player;
+import board.GameBoard;
 
 
 /**
@@ -22,7 +22,7 @@ import main.Player;
  */
 public class HighScore {
 
-	private static final String highScoreFile = "HighScoreTextfile.txt";
+	private static final String highScoreFile = "HighScoreTextfile.txt"; // TODO Fix so that file is in highscore folder
 
 	private ArrayList<Score> highScores;
 	private ArrayList<String> highScoreNames;
@@ -48,7 +48,7 @@ public class HighScore {
 		for (int n = 0; n < players.size(); n++) {
 
 			Player currentPlayer = players.get(n);
-			OriginalBoard currentBoard = currentPlayer.getPlayerBoard();
+			GameBoard currentBoard = currentPlayer.getPlayerBoard();
 
 			if (currentBoard.getDamagePercent() > highestDamageResult) {
 				highestDamageResult = currentBoard.getDamagePercent();

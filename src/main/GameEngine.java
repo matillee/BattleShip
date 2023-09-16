@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import highscore.*;
+import board.*;
 
 /**
  * To play the game.
@@ -36,17 +37,17 @@ public class GameEngine {
 
 			System.out.println("Player " + i + ": ");
 
-			OriginalBoard board = new OriginalBoard();
+			PlacementBoard placementBoard = new PlacementBoard();
 
 			System.out.println("Enter 'y' if you want to place your ships manually");
 			String input = scan.next();
 			if (input.equalsIgnoreCase("y")) {
-				board.placeShip();
+				placementBoard.placeShip();
 			} else {
-				board.autoPlacementShip();
+				placementBoard.autoPlacementShip();
 			}
 
-			playerList.add(new Player(enterName(), board));
+			playerList.add(new Player(enterName(), new GameBoard(placementBoard.getGameBoard())));
 
 		}
 
@@ -63,11 +64,11 @@ public class GameEngine {
 
 			String name = "Computer " + i;
 
-			OriginalBoard board = new OriginalBoard();
+			PlacementBoard placementBoard = new PlacementBoard();
 
-			board.autoPlacementShip();
+			placementBoard.autoPlacementShip();
 
-			playerList.add(new ComputerPlayer(name, board));
+			playerList.add(new ComputerPlayer(name, new GameBoard(placementBoard.getGameBoard())));
 
 		}
 

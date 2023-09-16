@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Scanner;
+import board.GameBoard;
 
 /**
  * To create players taking part of the games
@@ -11,11 +12,11 @@ public class Player {
 	private static Scanner scan = new Scanner(System.in);
 
 	protected String name;
-	protected OriginalBoard myBoard;
+	protected GameBoard myBoard;
 	protected int numOfShotsFired;
 	protected int numOfHits;
 
-	public Player(String name, OriginalBoard board) {
+	public Player(String name, GameBoard board) {
 		this.name = name;
 		this.myBoard = board;
 		this.numOfShotsFired = 0;
@@ -26,7 +27,7 @@ public class Player {
 		return this.name;
 	}
 
-	public OriginalBoard getPlayerBoard() {
+	public GameBoard getPlayerBoard() {
 		return this.myBoard;
 	}
 
@@ -57,7 +58,7 @@ public class Player {
 
 		boolean hit = false;
 
-		OriginalBoard playerBeingShotBoard = playerBeingShot.getPlayerBoard();
+		GameBoard playerBeingShotBoard = playerBeingShot.getPlayerBoard();
 
 		Integer inputRow = null;
 		Integer inputCol = null;
@@ -65,7 +66,7 @@ public class Player {
 		System.out.println(" ");
 		System.out.println(playerBeingShot.name + "'s board before shooting:");
 		System.out.println("----------------------------------");
-		playerBeingShotBoard.printGameBoard();
+		playerBeingShotBoard.printBoard();
 
 		do {
 			inputRow = null;
@@ -112,7 +113,7 @@ public class Player {
 			System.out.println(" ");
 			System.out.println(playerBeingShot.name + "'s board after " + this.name + " shot it:");
 			System.out.println("----------------------------------");
-			playerBeingShotBoard.printGameBoard();
+			playerBeingShotBoard.printBoard();
 			System.out.println("The damage percent on " + playerBeingShot.name + "'s board is: "
 					+ playerBeingShotBoard.getDamagePercent() + " %.");
 

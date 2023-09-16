@@ -1,11 +1,12 @@
 package main;
+import board.GameBoard;
 
 /**
  * A ComputerPlayer is everything that a Player is, except that it is autonomous
  */
 public class ComputerPlayer extends Player {
 
-	public ComputerPlayer(String name, OriginalBoard board) {
+	public ComputerPlayer(String name, GameBoard board) {
 		super(name, board);
 	}
 
@@ -25,7 +26,7 @@ public class ComputerPlayer extends Player {
 			} while(playerBeingShot.getPlayerBoard().getShotPlace().contains(new Integer(place)));
 			
 
-			OriginalBoard playerBeingShotBoard = playerBeingShot.getPlayerBoard();
+			GameBoard playerBeingShotBoard = playerBeingShot.getPlayerBoard();
 			
 			hit = playerBeingShotBoard.shootBoard(place,playerBeingShot.name, super.name);
 			
@@ -34,7 +35,7 @@ public class ComputerPlayer extends Player {
 			System.out.println(" ");
 			System.out.println(playerBeingShot.name + "'s board after " + super.name + " shot it:");
 			System.out.println("----------------------------------");
-			playerBeingShotBoard.printGameBoard();
+			playerBeingShotBoard.printBoard();
 			System.out.println("The damage percent on " + playerBeingShot.name + "'s board is: "
 					+ playerBeingShotBoard.getDamagePercent() + " %.");
 
