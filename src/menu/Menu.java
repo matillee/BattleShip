@@ -13,7 +13,7 @@ public class Menu implements MenuItem {
 	
 	private String title;
 	private ArrayList<MenuItem> items;
-	private final static Menu BattleShip = new Menu("BattleShip");
+	private final static Menu battleShip = new Menu("BattleShip");
 	
 
 	private static HighScore highScoreList = new HighScore();
@@ -26,7 +26,7 @@ public class Menu implements MenuItem {
 				System.exit(0);
 			}
 		};
-		BattleShip.add(quit);
+		battleShip.add(quit);
 		
 		AbstractMenuItem highScoreMenuItem = new AbstractMenuItem("Highscore") {
 			public void execute() {
@@ -34,10 +34,10 @@ public class Menu implements MenuItem {
 				System.out.println("HighScore - Least amount of shots fired before winning: ");
 				highScoreList.printHighScore();
 				
-				BattleShip.execute();
+				battleShip.execute();
 			}
 		};
-		BattleShip.add(highScoreMenuItem);
+		battleShip.add(highScoreMenuItem);
 		
 		AbstractMenuItem play = new AbstractMenuItem("Play") {
 			public void execute() {
@@ -49,12 +49,12 @@ public class Menu implements MenuItem {
 				GameEngine game = new GameEngine();
 				game.init(highScoreList);
 				
-				BattleShip.execute();
+				battleShip.execute();
 			}
 		};
 
-		BattleShip.add(play);
-		BattleShip.execute();
+		battleShip.add(play);
+		battleShip.execute();
 	}
 
 	
@@ -109,7 +109,7 @@ public class Menu implements MenuItem {
 		} else {
 			System.out.println("Try again! You need to enter an integer");
 			System.out.println("\n");
-			BattleShip.execute();
+			battleShip.execute();
 		}
 
 	}

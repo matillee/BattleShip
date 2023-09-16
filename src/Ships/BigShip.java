@@ -1,13 +1,10 @@
 package Ships;
-/**
- * Can be any size
- */
-public class ArbitraryShip implements Ship {
 
-	private int life;
+public class BigShip implements Ship {
 
-	public ArbitraryShip(int size) {
-		this.life = size;
+	private int life = 5;
+	
+	public BigShip() {
 	}
 
 	@Override
@@ -23,4 +20,6 @@ public class ArbitraryShip implements Ship {
 		else
 			return false;
 	}
+
 }
+
