@@ -94,23 +94,22 @@ public class Menu implements MenuItem {
 
 		String input = scan.next();
 		System.out.println(input);
-		if (input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4")) {
-			if (input.equals("0")) {
-				items.get(0).execute();
-			} else if (input.equals("1")) {
-				items.get(1).execute();
-			} else if (input.equals("2")) {
-				items.get(2).execute();
-			} else if (input.equals("3")) {
-				items.get(3).execute();
-			} else if (input.equals("4")) {
-				items.get(4).execute();
-			}
-		} else {
+		Integer number = 0;
+		try{
+			number = Integer.valueOf(input);
+		} catch (Exception e) {
 			System.out.println("Try again! You need to enter an integer");
 			System.out.println("\n");
 			battleShip.execute();
 		}
+
+		if(number >= items.size()){
+			System.out.println("Try again! " + number + " was not an option.");
+			System.out.println("\n");
+			battleShip.execute();
+		}
+
+		items.get(number).execute();
 
 	}
 
