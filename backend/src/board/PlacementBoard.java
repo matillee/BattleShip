@@ -89,6 +89,7 @@ public class PlacementBoard extends Board{
 
 	/**
 	 * Places the ships for the users.
+	 * Comment: most code not needed if graphical interface
 	 */
 	private void placeShipUser() {
 
@@ -162,6 +163,7 @@ public class PlacementBoard extends Board{
             return;
         }
 
+		// Comment: still needed if graphical interface
         ArbitraryShip ship = new ArbitraryShip(length);
 		ships.add(ship);
 
@@ -180,6 +182,7 @@ public class PlacementBoard extends Board{
 
 	}
 
+	// Comment: not needed if graphical interface
     private int getUserShipSize(){
         Integer length = null;
         if (numberOfSquares == 1) {
@@ -205,6 +208,7 @@ public class PlacementBoard extends Board{
         return length;
     }
 
+	// Comment: not needed if graphical interface
     private boolean shipFitsInsideBoard(Integer length, int input){
 
         if (input + length > 10) {

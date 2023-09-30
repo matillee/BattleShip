@@ -34,6 +34,7 @@ public class Board {
     /**
 	 * Prints the board during the game, used to hide the ships until they've been
 	 * shot.
+	 * Comment: not really needed if graphical interface
 	 */
     public void printBoard(HashMap<Integer, Coordinate> gameBoard) {
         System.out.println("   0  1  2  3  4  5  6  7  8  9");
