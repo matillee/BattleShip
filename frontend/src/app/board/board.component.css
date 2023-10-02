@@ -1,0 +1,20 @@
+.board {
+    width: auto;
+    height: auto;
+}
+
+mat-grid-tile {
+    background: lightblue;
+  }
+
+.ship {
+    background-color:red;
+}
+
+.water {
+    background-color: aqua;
+}
+
+.missed {
+    background-color: black;
+}

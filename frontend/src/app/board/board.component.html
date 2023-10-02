@@ -1,0 +1,19 @@
+<h1>Game Board:</h1>
+
+<mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile class="ship">Hej</mat-grid-tile>
+    <mat-grid-tile>Hej</mat-grid-tile>
+    <mat-grid-tile>Hej</mat-grid-tile>
+
+    <mat-grid-tile>Hej</mat-grid-tile>
+    <mat-grid-tile class="missed">Hej</mat-grid-tile>
+    <mat-grid-tile class="water">Hej</mat-grid-tile>
+
+    <mat-grid-tile>Hej</mat-grid-tile>
+    <mat-grid-tile>Hej</mat-grid-tile>
+    <mat-grid-tile>Hej</mat-grid-tile>
+
+    <mat-grid-tile (click)="onClick(square)" *ngFor="let square of squares">
+    {{square.text}}
+    </mat-grid-tile>
+  </mat-grid-list>
