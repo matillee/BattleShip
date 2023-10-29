@@ -4,7 +4,7 @@ A game of BattleShip.
 
 ## Backend
 
-Java. TODO: Maven
+Java. TODO: Convert old backend/src to springboot/src
 
 ## Frontend
 
